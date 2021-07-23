@@ -86,6 +86,7 @@ buttons = [
     [
         InlineKeyboardButton(text="ℹ️ABOUT", callback_data="masha_"),
         InlineKeyboardButton(text="📚COMMANDS", callback_data="help_back"),
+        InlineKeyboardButton(text="Davlopers", url="http://t.me/emcee_devs),
     ],
     [
         InlineKeyboardButton(
