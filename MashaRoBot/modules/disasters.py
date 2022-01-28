@@ -31,14 +31,13 @@ ELEVATED_USERS_FILE = os.path.join(os.getcwd(), "MashaRoBot/elevated_users.json"
 def check_user_id(user_id: int, context: CallbackContext) -> Optional[str]:
     bot = context.bot
     if not user_id:
-        reply = "That...is a chat! baka ka omae?"
+        return "That...is a chat! baka ka omae?"
 
     elif user_id == bot.id:
-        reply = "This does not work that way."
+        return "This does not work that way."
 
     else:
-        reply = None
-    return reply
+        return None
 
 
 # This can serve as a deeplink example.
@@ -65,8 +64,7 @@ def addsudo(update: Update, context: CallbackContext) -> str:
     user_member = bot.getChat(user_id)
     rt = ""
 
-    reply = check_user_id(user_id, bot)
-    if reply:
+    if reply := check_user_id(user_id, bot):
         message.reply_text(reply)
         return ""
 
@@ -127,8 +125,7 @@ def addsupport(
     user_member = bot.getChat(user_id)
     rt = ""
 
-    reply = check_user_id(user_id, bot)
-    if reply:
+    if reply := check_user_id(user_id, bot):
         message.reply_text(reply)
         return ""
 
@@ -183,8 +180,7 @@ def addwhitelist(update: Update, context: CallbackContext) -> str:
     user_member = bot.getChat(user_id)
     rt = ""
 
-    reply = check_user_id(user_id, bot)
-    if reply:
+    if reply := check_user_id(user_id, bot):
         message.reply_text(reply)
         return ""
 
@@ -239,8 +235,7 @@ def addtiger(update: Update, context: CallbackContext) -> str:
     user_member = bot.getChat(user_id)
     rt = ""
 
-    reply = check_user_id(user_id, bot)
-    if reply:
+    if reply := check_user_id(user_id, bot):
         message.reply_text(reply)
         return ""
 
@@ -299,8 +294,7 @@ def removesudo(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
     user_member = bot.getChat(user_id)
 
-    reply = check_user_id(user_id, bot)
-    if reply:
+    if reply := check_user_id(user_id, bot):
         message.reply_text(reply)
         return ""
 
@@ -342,8 +336,7 @@ def removesupport(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
     user_member = bot.getChat(user_id)
 
-    reply = check_user_id(user_id, bot)
-    if reply:
+    if reply := check_user_id(user_id, bot):
         message.reply_text(reply)
         return ""
 
@@ -385,8 +378,7 @@ def removewhitelist(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
     user_member = bot.getChat(user_id)
 
-    reply = check_user_id(user_id, bot)
-    if reply:
+    if reply := check_user_id(user_id, bot):
         message.reply_text(reply)
         return ""
 
@@ -427,8 +419,7 @@ def removetiger(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
     user_member = bot.getChat(user_id)
 
-    reply = check_user_id(user_id, bot)
-    if reply:
+    if reply := check_user_id(user_id, bot):
         message.reply_text(reply)
         return ""
 

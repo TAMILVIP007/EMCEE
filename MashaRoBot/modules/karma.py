@@ -26,7 +26,6 @@ regex_downvote = r"^(\-|\-\-|\-1|👎)$"
     & ~filters.edited,
     group=karma_positive_group
 )
-
 async def upvote(_, message):
     if message.reply_to_message.from_user.id == message.from_user.id:
         return
@@ -37,12 +36,10 @@ async def upvote(_, message):
     if current_karma:
         current_karma = current_karma['karma']
         karma = current_karma + 1
-        new_karma = {"karma": karma}
-        await update_karma(chat_id, await int_to_alpha(user_id), new_karma)
     else:
         karma = 1
-        new_karma = {"karma": karma}
-        await update_karma(chat_id, await int_to_alpha(user_id), new_karma)
+    new_karma = {"karma": karma}
+    await update_karma(chat_id, await int_to_alpha(user_id), new_karma)
     await message.reply_text(
         f'Incremented Karma of {user_mention} By 1 \nTotal Points: {karma}'
     )
@@ -59,7 +56,6 @@ async def upvote(_, message):
     & ~filters.edited,
     group=karma_negative_group
 )
-
 async def downvote(_, message):
     if message.reply_to_message.from_user.id == message.from_user.id:
         return
@@ -70,19 +66,16 @@ async def downvote(_, message):
     if current_karma:
         current_karma = current_karma['karma']
         karma = current_karma - 1
-        new_karma = {"karma": karma}
-        await update_karma(chat_id, await int_to_alpha(user_id), new_karma)
     else:
         karma = 1
-        new_karma = {"karma": karma}
-        await update_karma(chat_id, await int_to_alpha(user_id), new_karma)
+    new_karma = {"karma": karma}
+    await update_karma(chat_id, await int_to_alpha(user_id), new_karma)
     await message.reply_text(
         f'Decremented Karma Of {user_mention} By 1 \nTotal Points: {karma}'
     )
 
 
 @pbot.on_message(filters.command("karma") & filters.group)
-
 async def karma(_, message):
     chat_id = message.chat.id
 
@@ -110,9 +103,5 @@ async def karma(_, message):
     else:
         user_id = message.reply_to_message.from_user.id
         karma = await get_karma(chat_id, await int_to_alpha(user_id))
-        if karma:
-            karma = karma['karma']
-            await message.reply_text(f'**Total Points**: __{karma}__')
-        else:
-            karma = 0
-            await message.reply_text(f'**Total Points**: __{karma}__')
+        karma = karma['karma'] if karma else 0
+        await message.reply_text(f'**Total Points**: __{karma}__')
